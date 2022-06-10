@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget+ - Save money for free!</title>
+
+    <link href="../../packages/bootstrap-css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../packages/bootstrap-icons/bootstrap-icons.css " rel="stylesheet">
+    <link href="../../packages/bootstrap-icons/bootstrap-icons.css " rel="stylesheet">
+    <link href="../../packages/DataTables/datatables.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+ 
+
+</head>
+<body>
+    
+   
+    <section class="h-100 d-flex flex-row p-5 p-sm-0 p-t-5  "  >
+            <div id="sidenav"></div> 
+            <div class=" flex-column flex-fill   " style="background-color: #f0fafd;">         
+            <div id="topnav"></div>
+
+
+
+
+                
+            <div class=" d-flex  flex-row pt-5    ">
+                <div class="container ">
+        
+        <!-- Row 1 Start -->
+                        <div class="row pb-3">
+                             <div class="col-12">
+                                <div class="card bg-white">
+
+                                  <div class="card-body"> 
+                                    <div class="h3">Update Account Info</div>
+                                    <hr>
+
+                                    <div class="row">
+
+                                        <div class="col p-5">
+                                            <form id="updateForm" class="row g-3">
+                                                <div class="col-md-6">
+                                                  <label for="fnameInput" class="form-label">First Name</label>
+                                                  <input type="text" class="form-control text-dark" id="fnameInput" required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                  <label for="lnameInput" class="form-label">Last Name</label>
+                                                  <input type="text" class="form-control text-dark" id="lnameInput" required>
+                                                </div>
+                                                <div class="col-12">
+                                                  <label for="emailAddressInput" class="form-label">Email Address</label>
+                                                  <input type="email" class="form-control text-dark" id="emailAddressInput" placeholder="" required readonly>
+                                                </div>
+                                                 
+                                                <div class="col-md-6">
+                                                    <label for="newPasswordInput" class="form-label">New Password</label>
+                                                    <input type="password" class="form-control" id="newPasswordInput" >
+                                                  </div>
+                                          
+                                                  <div class="col-md-6">
+                                                    <label for="verifyNewPasswordInput" class="form-label">Verify New Password</label>
+                                                    <input type="password" class="form-control" id="verifyNewPasswordInput" >
+                                                  </div>
+                                                 
+                                                <div class="col-12">
+                                                  <button type="submit" class="btn btn-primary">Update Account</button>
+                                                </div>
+                                              </form>
+                                        </div>
+
+                                    </div>
+
+
+                                  </div>
+                                </div>
+                             </div>
+                            
+                        </div>
+        <!-- Row 1 End -->
+
+         <!-- Row 2 -->
+                        <div class="row  pb-3">
+                            <div class="col-12  ">
+                                <div class="card   bg-white  " >
+                                    <div class="card-body  ">
+                                        <div class="h3">
+                                            Account Data <i class="bi-bank2"></i>
+                                        </div>
+                                        <hr>
+
+                                        <div class="row justify-content-between">
+
+                                            <div class="col align-self-end">
+                                                <img src="../../images/folder-delete-icon.png" alt="">
+                                            
+                                             </div>
+
+                                        
+                                             <div class="col align-self-center">
+                                                 <button href="#" id="deleteButton" class="myButton"><span class="bi-x-lg"></span> Delete Everything</button>
+                                             </div>
+
+                                        </div>
+                                        
+                                        <div class="row  ">
+                                            <div class="col text-center ">
+                                                <b><i > <span style="color: red;">
+                                                    Warning there is no recovery, please make sure you have backed-up all of your data before clicking delete!!!!
+                                                </span> </i></b>
+                                            </div>
+                                        </div>
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+        <!-- Row 2 end-->
+                </div>
+            </div>
+        </div>
+
+
+
+      
+
+       
+
+       
+ 
+      
+
+    </section>
+ 
+
+    <!-- Modal -->
+    <div id="modalTemplate" > </div>
+    <!-- End of Modal -->
+
+    <script>window.$ = window.jQuery = require('../../packages/jquery/jquery.js');</script>
+    <script type="module" src="../../javascript/pages/settings.js"></script>
+      
+     
+     
+</body>
+</html>

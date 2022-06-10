@@ -1,0 +1,39 @@
+{ 
+    "appenders": {
+      "access": {
+        "type": "dateFile",
+        "filename": "logs/access.log",
+        "layout":{"type":"pattern","pattern": "[%d] [%p] [%f{2}] || %m"},
+        "category": "access"
+      },
+      "app": {
+        "type": "file",
+        "filename": "logs/app.log",
+        "maxLogSize": 10485760,
+        "numBackups": 3,
+        "layout":{"type":"pattern","pattern": "[%d] [%p] [%f{2}] || %m"}
+
+      },
+      "errorFile": {
+        "type": "file",
+        "filename": "logs/errors.log"
+      },
+      "errors": {
+        "type": "logLevelFilter",
+        "level": "ERROR",
+        "appender": "errorFile",
+        "layout":{"type":"pattern","pattern": "[%d] [%p] [%f{2}] [%m] || %s "}
+
+      },
+      "console": {
+        "type": "console",
+        "level": "ERROR"
+      }
+    },
+    "categories": {
+      "default": { "appenders": [ "app", "errors" ], "level": "debug" },
+        "console": { "appenders": [ "console" ], "level": "error" },
+          "access": { "appenders": [ "access","errors" ], "level": "info", "enableCallStack":true }
+
+    }
+  }

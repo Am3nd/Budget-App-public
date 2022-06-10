@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget+ - Save money for free!</title>
+
+    <link href="../../packages/bootstrap-css/bootstrap.css" rel="stylesheet">
+    <link href="../../packages/bootstrap-icons/bootstrap-icons.css " rel="stylesheet">
+    <link href="../../packages/DataTables/datatables.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+ 
+ 
+
+</head>
+<body>
+    
+   
+    <section class="h-100 d-flex flex-row p-5 p-sm-0 pb-5   "  >
+            <div id="sidenav"></div>
+            <div class=" flex-column flex-fill   " style="background-color: #f0fafd;">         
+            <div id="topnav"></div>
+
+
+
+
+                
+            <div class=" d-flex  flex-row pt-5   ">
+                <div class="container    ">
+        
+        <!-- Row 1 Start -->
+        <div class="row  pb-3 ">
+            <div class="col-12  ">
+                <div class="card   bg-white  " >
+                    <div class="card-body  ">
+                       
+                        <div class="d-flex justify-content-between">
+                            <div  > <div class="h3"> Account Balances <i class="bi-bank2"></i> </div></div>
+                            <div class="justify-content-end"><button id="addNewAccount" class="btn btn-sm btn-secondary">Add Account</button></div>
+            
+                        </div>
+                        <hr>
+                        <table id="accountsTable" class="display"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row 1 End -->
+
+         <!-- Row 2 -->
+                        <div class="row  pb-3  ">
+                            <div class="col-12  ">
+                                <div class="card   bg-white  " >
+                                    <div class="card-body   ">
+
+                                        
+                                        <div class="h3">
+                                            Import Transactions <i class="bi-file-arrow-down-fill"></i>
+                                        </div>
+                                        <hr>
+
+                                        <div class="row flex-fill align-items-center  " style="height:150px;">
+                                            <div class="col-4 h-100">
+                                                <img src="../../images/file.png" class="h-100" alt="">
+                                            </div>
+                                            <div class="col-4">
+                                                <button id="importTransactionsFile" class="btn btn-lg btn-primary importBTN">
+                                                    >> Import Transactions
+                                                </button>
+                                            </div>
+                                            <div class="col-4"></div>
+                                        </div>
+
+                                        <div class="row flex-fill align-items-center  " style="height:150px;">
+                                            <div class="col-4 h-100">
+                                                <img src="../../images/bank.png" class="h-100" alt="">
+                                            </div>
+                                            <div class="col-4">
+                                                <button class="btn btn-lg btn-primary importBTN  ">
+                                                    >> Import with Bank 
+                                                </button>
+                                            </div>
+                                            <div class="col-4 h-100">
+                                                <img src="../../images/coming-soon.png" class="h-100" alt="">
+                                            </div>
+                                        </div>
+
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+        <!-- Row 2 end-->
+                </div>
+            </div>
+        </div>
+
+
+
+      
+
+       
+
+       
+ 
+      
+
+    </section>
+ 
+
+     <!-- Modal -->
+
+     <div id="addNewAccountModal" class="modal text-dark" data-bs-backdrop="static"  tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <form class="input-group " id="newAccountForm">
+
+                <div class="modal-header" >
+                <h5 class="modal-title" >Add New Account</h5>
+                
+                </div>
+                <div class="modal-body" >
+                
+                    <div class="mb-3 row">
+                        <label for="newAccount" class="col-sm-3 col-form-label">Account (Last 4 digits):</label>
+                        <div class="col-sm-9">
+                        <input type="number" required    class="form-control text-dark" id="newAccount"  >
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="newName" class="col-sm-3 col-form-label">Name:</label>
+                        <div class="col-sm-9">
+                        <input type="text" required  class="form-control text-dark" id="newName"  >
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="newType" class="col-sm-3 col-form-label">Type:</label>
+                        <div class="col-sm-9">
+                            
+                            <select id="newType" required class="form-select form-select mb-3" aria-label=".form-select example">
+                                <option selected disabled value="" >Please select the category</option>
+                                <option value="Checking Account" >Checking Account</option>
+                                <option value="Savings Account" >Savings Account</option>
+                                <option value="Credit Card" >Credit Card</option>
+                                <option value="Investment Account" >Investment Account</option>
+                                <option value="Cryptocurrency" >Cryptocurrency</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="newBalance" class="col-sm-3 col-form-label">Current Balance:</label>
+                        <div class="col-sm-9">
+                        <input type="currency"  required class="form-control text-dark" id="newBalance"  >
+                        </div>
+                    </div>
+ 
+                
+                </div>
+                <div class="modal-footer " >
+                     <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" type="submit" >Create Account</button>  
+                    
+                </div> 
+        </form>
+          </div>
+        </div>
+      </div>
+    <!-- Modal -->
+
+       <!-- Start edit budget modal -->
+       <div id="editAccountModal" class="modal text-dark" data-bs-backdrop="static"  tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <form  id="editAccountForm">
+
+                <div class="modal-header" >
+                <h5 class="modal-title" >Editing Account</h5>
+                
+                </div>
+                <div class="modal-body" >
+                
+                    <div class="mb-3 row">
+                        <label for="editAccount" class="col-sm-3 col-form-label">Account:</label>
+                        <div class="col-sm-9">
+                        <input type="text" readonly class="form-control text-dark" id="editAccount"   >
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="editAccountName" class="col-sm-3 col-form-label">Account Name:</label>
+                        <div class="col-sm-9">
+                        <input type="text" readonly class="form-control text-dark" id="editAccountName"   >
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="editAccountType" class="col-sm-3 col-form-label">Account Type:</label>
+                        <div class="col-sm-9">
+                        <input type="text" readonly class="form-control text-dark" id="editAccountType"   >
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="editAccountBalance" class="col-sm-3 col-form-label">Account Balance:</label>
+                        <div class="col-sm-9">
+                        <input type="currency"   class="form-control text-dark " id="editAccountBalance"  >
+                        </div>
+                    </div>
+                     
+                     
+                
+                </div>
+                <div class=" " >
+                    <div class="  d-flex  flex-row    align-items-end ps-3 pb-3 pe-3">
+                        <div class="col  flex-fill  align-self-start ">
+                            <button class="btn btn-danger " type="button" id="deleteAccount" >Delete</button>
+    
+                        </div>
+
+                        <div>
+                            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-primary" type="submit" >Update</button>
+                        </div>
+                    </div>
+                </div> 
+        </form>
+          </div>
+        </div>
+      </div>
+    <!-- Modal -->
+
+    <!-- Modal -->
+    <div id="modalTemplate" > </div>
+    <!-- End of Modal -->
+
+    <script>window.$ = window.jQuery = require('../../packages/jquery/jquery.js');</script>
+    <script type="module" src="../../javascript/pages/manage-account.js"></script>
+
+     
+     
+</body>
+</html>

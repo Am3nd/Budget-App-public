@@ -1,0 +1,85 @@
+{
+  "name": "budget-app",
+  "version": "2.3.9",
+  "description": "Take charge of your finances with our 100% free budget planner. Our free budget tracker will help you understand your spending, save you money and help you plan for strong financial future.",
+  "main": "app/server/generated/main.js",
+  "scripts": {
+    "build": "tsc",
+    "build:tests": "tsc -p tests/tsconfig.json",
+    "tests": "npm run build:tests && mocha 'tests/**/*.js' ",
+    "watch": "tsc -w",
+    "lint": "eslint -c .eslintrc --ext .ts ./app/server/source",
+    "start": "npm run build && electron ./app/server/generated/main.js --dev",
+    "postinstall": "electron-builder install-app-deps",
+    "pack": "electron-builder --dir",
+    "dist": "tsc && electron-builder",
+    "publish": "electron-builder build --win -p always ",
+    "copy-files": "rimraff -u 1 src/**/*.html src/**/*.css dist/"
+  },
+  "author": "Abdi Ahmed, Gyan Gauchan, Raika Iftekhar, Raju Karki",
+  "license": "ISC",
+  "dependencies": {
+    "csv-parser": "^3.0.0",
+    "dotenv": "^9.0.2",
+    "electron-is-dev": "^2.0.0",
+    "firebase": "^9.1.3",
+    "log4js": "^6.3.0",
+    "path": "^0.12.7",
+    "sqlite3": "^4.2.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.22",
+    "@types/mocha": "^9.0.0",
+    "@types/sinon": "^10.0.4",
+    "@types/sqlite3": "^3.1.7",
+    "@types/uuid": "^8.3.1",
+    "@typescript-eslint/eslint-plugin": "^3.4.0",
+    "@typescript-eslint/parser": "^3.4.0",
+    "chai": "^4.3.4",
+    "electron": "^18.1.0",
+    "electron-builder": "^23.0.3",
+    "eslint": "^7.3.1",
+    "mocha": "^9.1.2",
+    "rimraf": "^3.0.2",
+    "sinon": "^11.1.2",
+    "typescript": "^4.3.5",
+    "typings": "^2.1.1"
+  },
+  "build": {
+    "productName": "Budget+",
+    "appId": "BudgetApp.0.1-8759",
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "extraResources": [
+      {
+        "from": "./app/server/source/extraResources",
+        "to": "extraResources",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ]
+  }
+}

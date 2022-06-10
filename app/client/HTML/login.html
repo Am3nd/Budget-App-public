@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+ 
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Budget+ - Save money for free!</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../css/main.css">
+        <link href="../packages/bootstrap-css/bootstrap.min.css" rel="stylesheet">
+        <link href="../packages/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+        <style>
+          body {
+              color: #fff;
+              background: #63738a;
+              font-family: 'Roboto', sans-serif;
+          }
+      </style>
+    </head>
+    <body>
+
+      <section>
+        <div class="signup-form needs-validation">
+            <form  id="loginForm"  >
+                <h2>User Login</h2>
+                <p class="hint-text">Welcome to Budget+: The Only Budget App You'll ever need!
+                </p>
+
+                <div class="form-group">
+                    <input type="email" class="form-control" id="loginEmail" placeholder="Email" required="required"  >
+                     
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="loginPassword" placeholder="Password" required="required" >
+                </div>
+     
+           
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-lg btn-block">Login Now</button>
+                </div>
+            </form>
+            <div class="text-center">New Here? <a href="./signup.html">Sign Up</a></div>
+            <div class="text-center">Forgot Password? <a href="" id="forgotPasswordLink">Reset</a></div>
+    </section>
+
+    <!-- Modal for Login Error -->
+    <div id="loginModal" class="modal text-dark" data-bs-backdrop="static"  tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header" >
+              <h5 class="modal-title" id="modalTitle">Unsuccessful Login</h5>
+               
+            </div>
+            <div class="modal-body" id="modalBody">
+              <p id="modalText">Email and Password Mismatch.</p>
+              <p id="modalText">Please try again.</p>
+            </div>
+            <div class="modal-footer" id="modalFooter">
+                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- Modal for Login Error -->
+
+        <!-- Modal for Login Error -->
+        <div id="forgotPasswordModal" class="modal text-dark" data-bs-backdrop="static"  tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+             <form id="passwordResetForm">
+
+             <div class="modal-content">
+              <div class="modal-header" >
+                <h5 class="modal-title" >Reset Password</h5>
+                 
+              </div>
+              <div id="resetModalBody" class="modal-body" >
+                <p id="modalText">Enter your email.</p>
+               
+                  <div class="row mb-3">
+                    <label for="emailToReset" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="emailToReset">
+                    </div>
+                  </div>
+                  
+              </div>
+              <div class="modal-footer" id="modalFooter">
+                  <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+                  <button class="btn btn-primary" type="submit" id="resetButton"  >Reset</button>
+              </div>
+            </div>
+          </form>
+          </div>
+        </div>
+      <!-- Modal for Login Error -->
+          
+    <script>window.$ = window.jQuery = require('../packages/jquery/jquery.js');</script>
+
+   
+ 
+        <script type="module" src="../javascript/auth/login.js"></script>
+ 
+
+          
+    </body>
+</html>

@@ -1,0 +1,37 @@
+
+
+export const QUERY  = {
+    ADD_NEW_ACCOUNT:"INSERT INTO accounts (account,accountID,balance,last_updated,name,type,userID) values(?, ?, ?, ?, ?, ?, ?)",
+    ADD_NEW_TRANSACTION:"INSERT INTO transactions (accountID,accountName,amount,category,cleared,date,description,recurring,txnID,userID) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    ADD_NEW_CATEGORY:"INSERT INTO categories (categoryID, name, subCategories) values(?, ?, ?)",
+    ADD_NEW_BUDGET:"INSERT OR REPLACE INTO budgets ( active,actualBalance,budgetID,categoryID,currentMonth,remainingBalance,totalBalance,userID  ) values(?,?,?,?,?,?,?,?)",
+    ADD_NEW_USER:"INSERT INTO users ( budgetStatus,email,fname,lastActive,lname,setupMode,userID) values(?, ?, ?, ?, ?, ?, ?)",
+    CLEAR_USER_SETUPMODE:(uid:string) =>{return `update users set setupMode=0 where userID="${uid}"`},
+    GET_USER_DATA:(uid:string) =>{return `SELECT * FROM users where userID="${uid}"`},
+    GET_BUDGET_SUMMARY:(uid:string) =>{return `select sum(totalBalance) as budget, sum(actualBalance) as actual,  (sum(totalBalance) - sum(actualBalance)) as remaining from  budgets where userID="${uid}" `},
+    GET_ALL_BUDGETS:(uid:string) =>{return `select  b.budgetID, b.userID, c.name as categoryName, b.categoryID, b.totalBalance, b.remainingBalance, b.actualBalance, b.active, b.currentMonth from budgets b join categories c where b.categoryID=c.categoryID and userID="${uid}"`},
+    GET_ALL_ACCOUNTS:(uid:string) =>{return `SELECT * FROM accounts where userID="${uid}"`},
+    GET_ALL_TRANSACTIONS:(uid:string) =>{return `SELECT * FROM transactions where userID="${uid}"`},
+    GET_ALL_EXPECTED_TRANSACTIONS:(uid:string) =>{return `SELECT * FROM transactions where userID="${uid}" and recurring=1`},
+    GET_TRANSACTION_CATEGORY_SPENDING_IN_RANGE:(uid:string, start:string, end:string) =>{return `select c.categoryID, sum(amount) as actual from  transactions t join categories c where c.name=t.category and  userID="${uid}" and date BETWEEN "${start}" and "${end}" group by c.categoryID  `},
+    GET_ALL_TRANSACTIONS_IN_RANGE:(uid:string, start:string, end:string) =>{return `SELECT * FROM transactions where userID="${uid}" and date BETWEEN "${start}" and "${end}"`},
+    GET_CURRENT_MONTH_SPENDING:(uid:string, start:string, end:string) =>{return `SELECT category, sum(amount) as actual FROM transactions WHERE userID="${uid}" and date BETWEEN "${start}" and "${end}" GROUP BY category`},
+    UPDATE_BUDGET_TOTALS_WITH_ZERO:(uid:string) =>{return `update budgets set actualBalance="0", remainingBalance=0 where userID="${uid}"`},
+    RESET_BUDGET_TOTALS_NEW_MONTH:(uid:string, currentMonth:number) =>{return `update budgets set actualBalance="0", currentMonth="${currentMonth}", remainingBalance=totalBalance where userID="${uid}" and currentMonth!="${currentMonth}"`},
+    UPDATE_BUDGET_TOTALS:(uid:string, categoryID:string, actualBalance:string) =>{return `update budgets set actualBalance="${actualBalance}", remainingBalance=(CAST(totalBalance as NUMERIC)-CAST(actualBalance as NUMERIC) ) where userID="${uid}" and categoryID="${categoryID}" `},
+    UPDATE_USER_PROFILE:(uid:string, fname:string, lname:string) =>{return `update users set fname="${fname}", lname="${lname}"   where userID="${uid}"`},
+    UPDATE_USER_TRANSACTION_CATEGORY:(uid:string, txnID:string, category:string) =>{return `UPDATE transactions set category="${category}" , cleared=1 where userID="${uid}" and txnID="${txnID}"`},
+    EDIT_BUDGET_TOTAL:(uid:string, budgetID:string, newTotal:string, newRemaining:string) =>{return `UPDATE budgets set totalBalance="${newTotal}", remainingBalance="${newRemaining}" where userID="${uid}" and budgetID="${budgetID}"`},
+    EDIT_ACCOUNT_BALANCE:(uid:string, accountID:string, newBalance:string) =>{return `UPDATE accounts set balance="${newBalance}" where userID="${uid}" and accountID="${accountID}"`},
+    DELETE_USER_TRANSACTIONS_SINGLE_ACCOUNT:(uid:string,accountID:string) =>{return `DELETE from transactions where userID="${uid}" and accountID="${accountID}"`},
+    DELETE_USER_TRANSACTIONS:(uid:string) =>{return `DELETE from transactions where userID="${uid}" `},
+    DELETE_SINGLE_USER_TRANSACTION:(uid:string, txnID:string) =>{return `DELETE from transactions where userID="${uid}" and txnID="${txnID}" `},
+    DELETE_SINGLE_USER_BUDGET:(uid:string, budgetID:string) =>{return `DELETE from budgets where userID="${uid}" and budgetID="${budgetID}" `},
+    DELETE_USER_ACCOUNTS:(uid:string) =>{return ` DELETE from accounts where userID="${uid}"`},
+    DELETE_USER_BUDGETS:(uid:string) =>{return ` DELETE from budgets where userID="${uid}"; `},
+    DELETE_USER_SINGLE_ACCOUNT:(uid:string, accountID:string) =>{return ` DELETE from accounts where userID="${uid}" and accountID="${accountID}"; `},
+    RESET_USER_SETUP_MODE:(uid:string) =>{return `update users set setupMode="1" where userID="${uid}"; `},
+    GET_ALL_CATEGORIES:  `SELECT * FROM categories` ,
+
+}
+ 

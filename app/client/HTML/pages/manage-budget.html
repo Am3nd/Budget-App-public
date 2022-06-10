@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget+ - Save money for free!</title>
+
+    <link href="../../packages/bootstrap-css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../packages/bootstrap-icons/bootstrap-icons.css " rel="stylesheet">
+    <link href="../../packages/bootstrap-icons/bootstrap-icons.css " rel="stylesheet">
+    <link href="../../packages/DataTables/datatables.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+ 
+
+</head>
+<body>
+    
+   
+    <section class="h-100 d-flex flex-row p-5 p-sm-0 p-t-5  "  >
+            <div id="sidenav"></div> 
+            <div class=" flex-column flex-fill   " style="background-color: #f0fafd;">         
+            <div id="topnav"></div>
+
+
+
+
+                
+            <div class=" d-flex  flex-row pt-5    ">
+                <div class="container ">
+        
+        <!-- Row 1 Start -->
+                        <div class="row pb-3">
+                            <div class="col-12">
+                                <div class="card bg-white">
+
+                                  <div class="card-body"> 
+                                    <div class="h3"><span id="currentMonthAndYear"></span></div>
+                                  <hr>
+                                   
+                                    <div class="row  text-center ">
+                                        <div class="col-3  ">
+                                            <div class="row text-success " ><b>Current Budget</b></div>
+                                            <div class="row"> <span id="totalBudget" >$0.00 </span> </div>
+                                            <!-- <div class="row"> <i> <span id="clearedTXN">0</span> Transactions</i> </div> -->
+                                        </div>
+                                      <div class="col-1 align-self-center">+</div>
+                                        <div class="col-3">
+                                            <div class="row text-danger"><b>Spending</b></div>
+                                            <div class="row"><span id="actualBudget">$0.00</span> </div>
+                                            <!-- <div class="row"> <span> <span id="pendingTXN">0</span> Transactions</span></div> -->
+                                        </div>
+                                        <div class="col-1 align-self-center">=</div>
+                                      
+                                        <div class="col-4">
+                                            <div class="row " id="totalTransactionsRow"><b>Overall Remaining Budget</b></div>
+                                            <div class="row"><span id="remainingBudget">$0.00</span></div>
+                                            <!-- <div class="row"><i><span id="totalNumberOfTXN">0</span> Transactions</i></div> -->
+                                        </div>
+                                    </div>
+
+                                  </div>
+                                </div>
+                             </div>
+                        </div>
+        <!-- Row 1 End -->
+
+         <!-- Row 2 -->
+                        <div class="row  pb-3">
+                            <div class="col-12  ">
+                                <div class="card   bg-white  " >
+                                    <div class="card-body  ">
+
+                                        <div class="d-flex justify-content-between">
+                                            <div  > <div class="h3">   Budget <i class="bi-archive-fill"></i>  </div></div>
+                                            <div class="justify-content-end">
+                                                <button id="addNewCategory" class="btn btn-sm btn-success">Add Category</button>
+                                                <button id="addNewBudget" class="btn btn-sm btn-primary">Add Budget</button>
+                                                
+                                            </div>
+                            
+                                        </div>
+                                         
+                                        <hr>
+                                        <table id="budgetTable" class="display"></table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+        <!-- Row 2 end-->
+                </div>
+            </div>
+        </div>
+
+
+
+      
+
+       
+
+       
+ 
+      
+
+    </section>
+ 
+    <!-- Modal -->
+    <div id="modalTemplate" > </div>
+    <!-- End of Modal -->
+
+    <!-- Start edit budget modal -->
+    <div id="editBudgetModal" class="modal text-dark" data-bs-backdrop="static"  tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <form  id="editBudgetForm">
+
+                <div class="modal-header" >
+                <h5 class="modal-title" id="modalTitle">Editing Budget</h5>
+                
+                </div>
+                <div class="modal-body" id="modalBody">
+                
+                    <div class="mb-3 row">
+                        <label for="editBudgetCategory" class="col-sm-3 col-form-label">Budget Category:</label>
+                        <div class="col-sm-9">
+                        <input type="text" readonly class="form-control text-dark" id="editBudgetCategory"   >
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="editTotal" class="col-sm-3 col-form-label">Budget Total:</label>
+                        <div class="col-sm-9">
+                        <input type="currency"   class="form-control text-dark " id="editBudgetTotal"  >
+                        </div>
+                    </div>
+                     
+                    <div class="mb-3 row">
+                        <label for="editActual" class="col-sm-3 col-form-label">Current Spend:</label>
+                        <div class="col-sm-9">
+                        <input type="text" readonly class=" form-control text-dark" id="editActual"   >
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="editRemaining" class="col-sm-3 col-form-label">Remaining:</label>
+                        <div class="col-sm-9">
+                        <input type="text" readonly   class="form-control text-dark" id="editRemaining"   >
+                        </div>
+                    </div>
+                
+                </div>
+                <div class=" " id="modalFooter">
+                    <div class="  d-flex  flex-row    align-items-end ps-3 pb-3 pe-3">
+                        <div class="col  flex-fill  align-self-start ">
+                            <button class="btn btn-danger " type="button" id="deleteBudget" >Delete</button>
+    
+                        </div>
+
+                        <div>
+                            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-primary" type="submit" >Update</button>
+                        </div>
+                    </div>
+                </div> 
+        </form>
+          </div>
+        </div>
+      </div>
+    <!-- Modal -->
+ 
+    <!-- Add new Budget modal start -->
+    <div id="addNewBudgetModal" class="modal text-dark" data-bs-backdrop="static"  tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <form class="input-group " id="newBudgetForm">
+
+                <div class="modal-header" >
+                <h5 class="modal-title" id="modalTitle">Add New Budget</h5>
+                
+                </div>
+                <div class="modal-body" id="modalBody">
+                
+                    <div class="mb-3 row">
+                        <label for="newCategory" class="col-sm-3 col-form-label">Category:</label>
+                        <div class="col-sm-9">
+                            
+                            <select id="newBudgetCategory" required class="form-select form-select mb-3" aria-label=".form-select example">
+                                <option selected disabled value="" >Please select the category</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="newBudgetTotal" class="col-sm-3 col-form-label">Budget Total:</label>
+                        <div class="col-sm-9">
+                        <input type="currency"   class="form-control text-dark" id="newBudgetTotal"  required value="$0.00">
+                        </div>
+                    </div>
+                
+                </div>
+                <div class="modal-footer" id="modalFooter">
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" type="submit" >Create Budget</button>
+                </div> 
+        </form>
+          </div>
+        </div>
+      </div>
+    <!-- Modal -->
+
+       <!-- Add new Budget modal start -->
+       <div id="addNewCategoryModal" class="modal text-dark" data-bs-backdrop="static"  tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <form class="input-group " id="newCategoryForm">
+
+                <div class="modal-header" >
+                <h5 class="modal-title" id="modalTitle">Add New Category</h5>
+                
+                </div>
+                <div class="modal-body" id="modalBody">
+                
+                    <div class="mb-3 row">
+                        <label for="newCategoryName" class="col-sm-3 col-form-label">Category Name:</label>
+                        <div class="col-sm-9">
+                        <input type="text" required  class="form-control text-dark" id="newCategoryName"  >
+                        </div>
+                    </div>
+
+               
+                
+                </div>
+                <div class="modal-footer" id="modalFooter">
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" type="submit" >Create Category</button>
+                </div> 
+        </form>
+          </div>
+        </div>
+      </div>
+    <!-- Modal -->
+
+    <script>window.$ = window.jQuery = require('../../packages/jquery/jquery.js');</script>
+    <script type="module" src="../../javascript/pages/manage-budget.js"></script>
+      
+     
+</body>
+</html>
