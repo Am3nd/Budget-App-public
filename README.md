@@ -3,6 +3,8 @@
 
 ## _The Only Budget App You will ever need!_
 
+(No Active Development)
+
 [![N|Solid](https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Electron_Software_Framework_Logo.svg/100px-Electron_Software_Framework_Logo.svg.png)](https://www.electronjs.org/)
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
